@@ -106,6 +106,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     final textDate = date.toString().split(" ").first;
     _birthdayController.text = textDate;
     setState(() {
+      _formData["birthday"] = textDate;
       _isBirthdayValid = _validateBirthday(textDate) == null;
       _validateForm();
     });
@@ -116,13 +117,15 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
       _formData.addAll(widget.initialFormData!);
       _usernameController.text = _formData["username"] ?? '';
       _emailController.text = _formData["email"] ?? '';
-      _birthdayController.text = _formData['birth'] ?? '';
+      _birthdayController.text = _formData["birthday"] ?? '';
     }
+    setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
+
     _initializeFormData();
   }
 
@@ -183,6 +186,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
               onChanged: (value) {
                 setState(() {
                   _isNameValid = _validateName(value) == null;
+                  _formData["username"] = value;
                 });
               },
             ),
@@ -203,6 +207,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
               onChanged: (value) {
                 setState(() {
                   _isEmailValid = _validateEmail(value) == null;
+                  _formData["email"] = value;
                 });
               },
             ),
@@ -225,9 +230,11 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
               onChanged: (value) {
                 setState(() {
                   _isBirthdayValid = _validateBirthday(value) == null;
+                  _formData["birthday"] = value;
                 });
               },
             ),
+            widget.isReturning ? sign(context) : const Text(""),
           ],
         ),
       ),
@@ -236,9 +243,12 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
         child: GestureDetector(
           onTap: _validateForm() ? _onSubmitTap : null,
           child: widget.isReturning
-              ? const FormButton(
-                  text: "Sign Up",
-                  btnSize: 1,
+              ? Container(
+                  margin: const EdgeInsets.all(Sizes.size20),
+                  child: const FormButton(
+                    text: "Sign Up",
+                    btnSize: 1,
+                  ),
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -273,6 +283,67 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                 ),
         ),
       ),
+    );
+  }
+
+  Column sign(BuildContext context) {
+    return Column(
+      children: [
+        Gaps.v96,
+        Gaps.v96,
+        RichText(
+          text: TextSpan(
+            style: const TextStyle(
+              fontSize: Sizes.size18,
+              color: Colors.black54,
+            ),
+            children: [
+              const TextSpan(text: "By signing up, you agree to our "),
+              TextSpan(
+                text: "Terms",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+              const TextSpan(text: ", "),
+              TextSpan(
+                text: " Privacy Policy",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+              const TextSpan(text: ", and"),
+              TextSpan(
+                text: " Cookie Use",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+              const TextSpan(text: "."),
+              const TextSpan(
+                text:
+                    "Twitter may use your contact information, including your email adress and phone number for purpose outlined in our Privacy Policy.",
+              ),
+              TextSpan(
+                text: " Learn more",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+              const TextSpan(
+                text:
+                    " Others will be able to find you by email or phone number, when provided, unless you choose otherwise ",
+              ),
+              TextSpan(
+                text: " here",
+                style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 

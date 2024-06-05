@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
-import 'package:tiktok_challenge/features/create_user_form_screen.dart';
+import 'package:tiktok_challenge/features/create_user_screen.dart';
 
 class CustomizeExperienceScreen extends StatefulWidget {
   const CustomizeExperienceScreen({
@@ -29,7 +29,7 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
 
   void _onTap() {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => CreateUserFormScreen(
+      builder: (context) => CreateUserScreen(
         initialFormData: widget.formData,
         isReturning: true,
       ),
@@ -63,14 +63,62 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
               "Track where you see Twitter content across the web",
               style: Theme.of(context).textTheme.titleMedium,
             ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: SwitchListTile.adaptive(
-                value: notifications,
-                onChanged: onNotificationsChanged,
-                title: Text(
+            Gaps.v24,
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
                     "Twitter uses this data to personalize your experience. This web browsing history will never be stored with your name, email, or phone number",
-                    style: Theme.of(context).textTheme.bodyLarge),
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+                Switch.adaptive(
+                  value: notifications,
+                  onChanged: onNotificationsChanged,
+                ),
+              ],
+            ),
+            Gaps.v24,
+            RichText(
+              text: TextSpan(
+                style: const TextStyle(
+                  fontSize: Sizes.size16,
+                  color: Colors.black54,
+                ),
+                children: [
+                  const TextSpan(text: "By signing up, you agree to our "),
+                  TextSpan(
+                    text: "Terms",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  const TextSpan(text: ", "),
+                  TextSpan(
+                    text: " Privacy Policy",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  const TextSpan(text: ", and"),
+                  TextSpan(
+                    text: " Cookie Use",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  const TextSpan(text: "."),
+                  const TextSpan(
+                    text:
+                        "Twitter may use your contact information, including your email adress and phone number for purpose outlined in our Privacy Policy.",
+                  ),
+                  TextSpan(
+                    text: " Learn more",
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
