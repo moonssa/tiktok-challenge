@@ -28,7 +28,7 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
   }
 
   void _onTap() {
-    Navigator.of(context).push(MaterialPageRoute(
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
       builder: (context) => CreateUserScreen(
         initialFormData: widget.formData,
         isReturning: true,

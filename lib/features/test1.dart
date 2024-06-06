@@ -89,14 +89,49 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return SizedBox(
-          height: 250,
-          child: CupertinoDatePicker(
-            maximumDate: initialDate,
-            initialDateTime: initialDate,
-            mode: CupertinoDatePickerMode.date,
-            onDateTimeChanged: _setTextFieldDate,
-          ),
+        return Stack(
+          children: [
+            SizedBox(
+              height: 250,
+              child: CupertinoDatePicker(
+                maximumDate: initialDate,
+                initialDateTime: initialDate,
+                mode: CupertinoDatePickerMode.date,
+                onDateTimeChanged: _setTextFieldDate,
+              ),
+            ),
+            Positioned(
+              bottom: 10,
+              right: 10,
+              child: GestureDetector(
+                onTap: _validateForm() ? _onSubmitTap : null,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: Sizes.size12,
+                    horizontal: Sizes.size24,
+                  ),
+                  decoration: BoxDecoration(
+                    color:
+                        _validateForm() ? Colors.black : Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(Sizes.size24),
+                    border: Border.all(
+                      color: Colors.grey.shade200,
+                      width: Sizes.size1,
+                    ),
+                  ),
+                  child: const Text(
+                    "Next",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: Sizes.size16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -177,11 +212,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                 hintText: "Name",
                 suffixIcon: FaIcon(
                   FontAwesomeIcons.circleCheck,
-                  color: widget.isReturning
-                      ? Colors.green
-                      : _isNameValid
-                          ? Colors.green
-                          : Colors.grey.shade400,
+                  color: _isNameValid ? Colors.green : Colors.grey.shade400,
                 ),
                 errorText: _isNameValid
                     ? null
@@ -202,11 +233,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                 hintText: "Email",
                 suffixIcon: FaIcon(
                   FontAwesomeIcons.circleCheck,
-                  color: widget.isReturning
-                      ? Colors.green
-                      : _isEmailValid
-                          ? Colors.green
-                          : Colors.grey.shade400,
+                  color: _isEmailValid ? Colors.green : Colors.grey.shade400,
                 ),
                 errorText: _isEmailValid
                     ? null
@@ -229,11 +256,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                 hintText: "Date of Birth ",
                 suffixIcon: FaIcon(
                   FontAwesomeIcons.circleCheck,
-                  color: widget.isReturning
-                      ? Colors.green
-                      : _isBirthdayValid
-                          ? Colors.green
-                          : Colors.grey.shade400,
+                  color: _isBirthdayValid ? Colors.green : Colors.grey.shade400,
                 ),
                 errorText: _isBirthdayValid
                     ? null
