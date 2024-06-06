@@ -5,15 +5,15 @@ class FormButton extends StatelessWidget {
   const FormButton({
     super.key,
     required this.text,
-    required this.btnSize,
+    required this.reverse,
   });
   final String text;
-  final int btnSize;
+  final bool reverse;
 
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
-      widthFactor: btnSize == 1 ? 1 : 0.3,
+      widthFactor: 1,
       child: Container(
         padding: const EdgeInsets.symmetric(
           vertical: Sizes.size14,
@@ -21,7 +21,7 @@ class FormButton extends StatelessWidget {
         ),
         // alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: reverse ? Theme.of(context).primaryColor : Colors.black,
           borderRadius: BorderRadius.circular(Sizes.size24),
           border: Border.all(
             color: Colors.grey.shade200,

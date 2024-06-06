@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
 import 'package:tiktok_challenge/features/create_user_screen.dart';
+import 'package:tiktok_challenge/widgets/next_button.dart';
 
 class CustomizeExperienceScreen extends StatefulWidget {
   const CustomizeExperienceScreen({
@@ -131,30 +132,7 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
-                margin: const EdgeInsets.all(Sizes.size24),
-                padding: const EdgeInsets.symmetric(
-                  vertical: Sizes.size12,
-                  horizontal: Sizes.size24,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(Sizes.size24),
-                  border: Border.all(
-                    color: Colors.grey.shade200,
-                    width: Sizes.size1,
-                  ),
-                ),
-                child: const Text(
-                  "Next",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: Sizes.size16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              NextButton(disable: !notifications),
             ],
           ),
         ),

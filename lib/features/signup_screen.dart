@@ -101,7 +101,7 @@ class SignUpScreen extends StatelessWidget {
                         onTap: () => _onSignupTap(context),
                         child: const FormButton(
                           text: "Create Account",
-                          btnSize: 1,
+                          reverse: false,
                         ),
                       ),
                       Gaps.v32,

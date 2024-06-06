@@ -5,6 +5,7 @@ import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
 import 'package:tiktok_challenge/features/customize_screen.dart';
 import 'package:tiktok_challenge/widgets/form_button.dart';
+import 'package:tiktok_challenge/widgets/next_button.dart';
 
 class CreateUserScreen extends StatefulWidget {
   const CreateUserScreen({
@@ -246,7 +247,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                 });
               },
             ),
-            widget.isReturning ? sign(context) : const Text(""),
+            widget.isReturning ? createSignUpInfo(context) : const Text(""),
           ],
         ),
       ),
@@ -259,38 +260,13 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
                   margin: const EdgeInsets.all(Sizes.size20),
                   child: const FormButton(
                     text: "Sign Up",
-                    btnSize: 1,
+                    reverse: true,
                   ),
                 )
               : Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Container(
-                      margin: const EdgeInsets.all(Sizes.size24),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: Sizes.size12,
-                        horizontal: Sizes.size24,
-                      ),
-                      decoration: BoxDecoration(
-                        color: _validateForm()
-                            ? Colors.black
-                            : Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(Sizes.size24),
-                        border: Border.all(
-                          color: Colors.grey.shade200,
-                          width: Sizes.size1,
-                        ),
-                      ),
-                      child: const Text(
-                        "Next",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: Sizes.size16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                    NextButton(disable: !_validateForm()),
                   ],
                 ),
         ),
@@ -298,7 +274,7 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     );
   }
 
-  Column sign(BuildContext context) {
+  Column createSignUpInfo(BuildContext context) {
     return Column(
       children: [
         Gaps.v96,
@@ -359,8 +335,11 @@ class _CreateUserScreenState extends State<CreateUserScreen> {
     );
   }
 
-  InputDecoration customInputDecoration(
-      {String? hintText, FaIcon? suffixIcon, String? errorText}) {
+  InputDecoration customInputDecoration({
+    String? hintText,
+    FaIcon? suffixIcon,
+    String? errorText,
+  }) {
     return InputDecoration(
       suffix: suffixIcon,
       hintText: hintText,
