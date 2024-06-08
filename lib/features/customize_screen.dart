@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
-import 'package:tiktok_challenge/features/create_user_screen.dart';
+import 'package:tiktok_challenge/features/terms_agreement_screen.dart';
 import 'package:tiktok_challenge/widgets/next_button.dart';
 
 class CustomizeExperienceScreen extends StatefulWidget {
@@ -30,7 +30,7 @@ class _CustomizeExperienceScreenState extends State<CustomizeExperienceScreen> {
 
   void _onTap() {
     Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (context) => CreateUserScreen(
+      builder: (context) => TermsAgreementScreen(
         initialFormData: widget.formData,
         isReturning: true,
       ),

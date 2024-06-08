@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
-import 'package:tiktok_challenge/features/create_user_screen.dart';
+import 'package:tiktok_challenge/features/create_account_screen.dart';
 import 'package:tiktok_challenge/widgets/auth_button.dart';
 import 'package:tiktok_challenge/widgets/form_button.dart';
 
@@ -11,7 +11,7 @@ class SignUpScreen extends StatelessWidget {
 
   _onSignupTap(BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => const CreateUserScreen(),
+      builder: (context) => const CreateAccountScreen(),
     ));
   }
 
@@ -101,7 +101,7 @@ class SignUpScreen extends StatelessWidget {
                         onTap: () => _onSignupTap(context),
                         child: const FormButton(
                           text: "Create Account",
-                          reverse: false,
+                          disable: false,
                         ),
                       ),
                       Gaps.v32,

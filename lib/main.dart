@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:tiktok_challenge/features/signup_screen.dart';
+import 'package:tiktok_challenge/features/send_code_screen.dart';
 import 'package:tiktok_challenge/theme/tk_theme.dart';
 
 void main() {
@@ -22,7 +21,9 @@ class MyApp extends StatelessWidget {
         textTheme: AppTextTheme.textTheme,
         useMaterial3: true,
       ),
-      home: const SignUpScreen(),
+      home: const SendCodeScreen(
+        emailAdress: "mm@naver.comn",
+      ),
     );
   }
 }

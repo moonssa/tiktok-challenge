@@ -5,10 +5,10 @@ class FormButton extends StatelessWidget {
   const FormButton({
     super.key,
     required this.text,
-    required this.reverse,
+    required this.disable,
   });
   final String text;
-  final bool reverse;
+  final bool disable;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,11 @@ class FormButton extends StatelessWidget {
         ),
         // alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: reverse ? Theme.of(context).primaryColor : Colors.black,
+          color: text == "Sign Up"
+              ? Theme.of(context).primaryColor
+              : disable
+                  ? Colors.black38
+                  : Colors.black,
           borderRadius: BorderRadius.circular(Sizes.size24),
           border: Border.all(
             color: Colors.grey.shade200,
