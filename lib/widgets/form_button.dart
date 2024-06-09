@@ -14,7 +14,8 @@ class FormButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       widthFactor: 1,
-      child: Container(
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 1000),
         padding: const EdgeInsets.symmetric(
           vertical: Sizes.size14,
           horizontal: Sizes.size14,

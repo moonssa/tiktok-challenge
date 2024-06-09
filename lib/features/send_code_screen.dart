@@ -32,9 +32,36 @@ class _SendCodeScreenState extends State<SendCodeScreen> {
     setState(() {});
   }
 
+/*
+void _onTap() {
+    print(_selectedInterests);
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 700),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            InterestsDetailScreen(
+          selectedCategories: _selectedInterests.toList(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final offsetAnimation = Tween<Offset>(
+            begin: const Offset(1.0, 0.0),
+            end: const Offset(0.0, 0.0),
+          ).animate(animation);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
+
+
+*/
   void _onSubmitTap() {
     _formKey.currentState?.save();
-    print(_formData);
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(
         builder: (context) => const PasswordScreen(),

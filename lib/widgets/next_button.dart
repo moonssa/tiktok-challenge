@@ -9,7 +9,8 @@ class NextButton extends StatelessWidget {
   final bool disable;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 1000),
       margin: const EdgeInsets.all(Sizes.size24),
       padding: const EdgeInsets.symmetric(
         vertical: Sizes.size12,

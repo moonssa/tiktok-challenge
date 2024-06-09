@@ -168,10 +168,11 @@ class _InterestsDetailScreenState extends State<InterestsDetailScreen> {
         color: Colors.white,
         child: GestureDetector(
           // onTap: _onTap,
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              NextButton(disable: false),
+              NextButton(
+                  disable: _selectedInterests.length >= 3 ? false : true),
             ],
           ),
         ),

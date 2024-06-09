@@ -36,11 +36,32 @@ class _InterestsScreenState extends State<InterestsScreen> {
   }
 
   void _onTap() {
-    print(_selectedInterests);
-    Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => InterestsDetailScreen(
-          selectedCategories: _selectedInterests.toList()),
-    ));
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 700),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            InterestsDetailScreen(
+          selectedCategories: _selectedInterests.toList(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -57,73 +78,86 @@ class _InterestsScreenState extends State<InterestsScreen> {
         padding: const EdgeInsets.only(
           bottom: Sizes.size80,
         ),
-        child: SingleChildScrollView(
+        child: Scrollbar(
           controller: _scrollController,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: Sizes.size20,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Sizes.size40,
-                  ),
-                  child: Text(
-                    "What do you want to see on Twitter?",
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
-                ),
-                Gaps.v24,
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Sizes.size40,
-                  ),
-                  child: Text(
-                    "Select at least 3 interests to personalize your Twitter experience. They will be visible on your profile",
-                    style: GoogleFonts.openSans(
-                      fontSize: Sizes.size18,
-                      color: Colors.black54,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: -0.5,
+          child: SingleChildScrollView(
+            controller: _scrollController,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: Sizes.size20,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Sizes.size40,
+                    ),
+                    child: Text(
+                      "What do you want to see on Twitter?",
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ),
-                ),
-                Gaps.v24,
-                Divider(
-                  height: Sizes.size1,
-                  color: Colors.grey.shade300,
-                  thickness: 1,
-                ),
-                Gaps.v24,
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: Sizes.size24,
+                  Gaps.v24,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Sizes.size40,
+                    ),
+                    child: Text(
+                      "Select at least 3 interests to personalize your Twitter experience. They will be visible on your profile",
+                      style: GoogleFonts.openSans(
+                        fontSize: Sizes.size18,
+                        color: Colors.black54,
+                        fontWeight: FontWeight.w400,
+                        letterSpacing: -0.5,
+                      ),
+                    ),
                   ),
-                  child: Wrap(
-                    runSpacing: 15,
-                    spacing: 20,
-                    children: [
-                      for (var category in interestCategories)
-                        GestureDetector(
-                          onTap: () => _toggleSelected(category.category),
-                          child: Stack(
-                            children: [
-                              Container(
-                                width: 160,
-                                height: 80,
-                                decoration: BoxDecoration(
-                                  color: _selectedInterests
-                                          .contains(category.category)
-                                      ? Theme.of(context).primaryColor
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(
-                                    Sizes.size10,
+                  Gaps.v24,
+                  Divider(
+                    height: Sizes.size1,
+                    color: Colors.grey.shade300,
+                    thickness: 1,
+                  ),
+                  Gaps.v24,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: Sizes.size24,
+                    ),
+                    child: Wrap(
+                      runSpacing: 15,
+                      spacing: 20,
+                      children: [
+                        for (var category in interestCategories)
+                          GestureDetector(
+                            onTap: () => _toggleSelected(category.category),
+                            child: Stack(
+                              children: [
+                                Container(
+                                  // duration: const Duration(
+                                  //   milliseconds: 700,
+                                  // ),
+                                  // curve: Curves.easeInOut,
+                                  width: 160,
+                                  height: 80,
+                                  decoration: BoxDecoration(
+                                    color: _selectedInterests
+                                            .contains(category.category)
+                                        ? Theme.of(context).primaryColor
+                                        : Colors.transparent,
+                                    borderRadius: BorderRadius.circular(
+                                      Sizes.size10,
+                                    ),
+                                    border: Border.all(color: Colors.black12),
+                                    // boxShadow: [
+                                    //   BoxShadow(
+                                    //     color: Colors.black.withOpacity(0.05),
+                                    //     spreadRadius: 0,
+                                    //     blurRadius: 3,
+                                    //     // offset:Offset (0,3),
+                                    //   )
+                                    // ],
                                   ),
-                                  border: Border.all(color: Colors.black26),
-                                ),
-                                child: Container(
                                   alignment: Alignment.bottomLeft,
                                   padding: const EdgeInsets.only(
                                     bottom: Sizes.size10,
@@ -140,32 +174,33 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                     ),
                                   ),
                                 ),
-                              ),
-                              if (_selectedInterests
-                                  .contains(category.category))
-                                Positioned(
-                                  right: 10,
-                                  top: 10,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(Sizes.size4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(50),
+                                if (_selectedInterests
+                                    .contains(category.category))
+                                  Positioned(
+                                    right: 10,
+                                    top: 10,
+                                    child: Container(
+                                      padding:
+                                          const EdgeInsets.all(Sizes.size4),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(50),
+                                      ),
+                                      child: FaIcon(
+                                        FontAwesomeIcons.check,
+                                        color: Theme.of(context).primaryColor,
+                                        size: Sizes.size10,
+                                      ),
                                     ),
-                                    child: FaIcon(
-                                      FontAwesomeIcons.check,
-                                      color: Theme.of(context).primaryColor,
-                                      size: Sizes.size10,
-                                    ),
-                                  ),
-                                )
-                            ],
+                                  )
+                              ],
+                            ),
                           ),
-                        ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -181,7 +216,7 @@ class _InterestsScreenState extends State<InterestsScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _isSelected
-                  ? const Text("Greate Work")
+                  ? const Text("Greate Work 🎉🎉")
                   : Text("${_selectedInterests.length} of 3 selected"),
               NextButton(disable: !_isSelected),
             ],
