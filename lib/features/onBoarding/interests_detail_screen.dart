@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
+import 'package:tiktok_challenge/features/main_navigation/main_navigation_screen.dart';
 import 'package:tiktok_challenge/features/onBoarding/interests_data.dart';
 import 'package:tiktok_challenge/widgets/next_button.dart';
 
@@ -32,6 +33,20 @@ class _InterestsDetailScreenState extends State<InterestsDetailScreen> {
     }
 
     setState(() {});
+  }
+
+  void _onTap() {
+    Navigator.of(context).pushAndRemoveUntil(
+      PageRouteBuilder(
+        transitionDuration: const Duration(milliseconds: 500),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const MainNavigationScreen(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+      ),
+      (route) => false,
+    );
   }
 
   @override
@@ -164,16 +179,19 @@ class _InterestsDetailScreenState extends State<InterestsDetailScreen> {
           ),
         ],
       ),
-      bottomSheet: Container(
-        color: Colors.white,
-        child: GestureDetector(
-          // onTap: _onTap,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              NextButton(
-                  disable: _selectedInterests.length >= 3 ? false : true),
-            ],
+      bottomSheet: GestureDetector(
+        onTap: _onTap,
+        child: Container(
+          color: Colors.white,
+          child: GestureDetector(
+            // onTap: _onTap,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                NextButton(
+                    disable: _selectedInterests.length >= 3 ? false : true),
+              ],
+            ),
           ),
         ),
       ),

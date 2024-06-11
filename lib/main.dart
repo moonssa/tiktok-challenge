@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_challenge/features/send_code_screen.dart';
-import 'package:tiktok_challenge/theme/tk_theme.dart';
+import 'package:tiktok_challenge/features/home_screen.dart';
+import 'package:tiktok_challenge/features/main_navigation/main_navigation_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,12 +18,10 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: Colors.white,
         primaryColor: const Color(0xFF4e98e9),
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
-        textTheme: AppTextTheme.textTheme,
+        // textTheme: AppTextTheme.textTheme,
         useMaterial3: true,
       ),
-      home: const SendCodeScreen(
-        emailAdress: "mm@naver.comn",
-      ),
+      home: const MainNavigationScreen(),
     );
   }
 }
