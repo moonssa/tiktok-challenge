@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_challenge/features/home_screen.dart';
 import 'package:tiktok_challenge/features/main_navigation/main_navigation_screen.dart';
 
 void main() {

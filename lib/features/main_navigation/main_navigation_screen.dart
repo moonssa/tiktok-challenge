@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
-import 'package:tiktok_challenge/features/home_screen.dart';
+import 'package:tiktok_challenge/features/timeline/home_screen.dart';
 import 'package:tiktok_challenge/features/main_navigation/nav_tab.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -22,7 +22,9 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
       child: Text("Search"),
     ),
     const Center(
-      child: Text("Edit"),
+      child: Text(
+        "Edit",
+      ),
     ),
     const Center(
       child: Text("Like"),
@@ -47,7 +49,23 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           Offstage(
             offstage: _selectedIndex != 0,
             child: const HomeScreen(),
-          )
+          ),
+          Offstage(
+            offstage: _selectedIndex != 1,
+            child: const Center(child: Text(" 🔎 준비중....")),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 2,
+            child: const Center(child: Text(" 📝 준비중....")),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 3,
+            child: const Center(child: Text(" ❤️ 준비중....")),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 4,
+            child: const Center(child: Text(" 🧑‍⚕️ 준비중....")),
+          ),
         ],
       )),
       bottomNavigationBar: BottomAppBar(
