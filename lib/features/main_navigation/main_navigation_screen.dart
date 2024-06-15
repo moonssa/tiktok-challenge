@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
-import 'package:tiktok_challenge/features/timeline/home_screen.dart';
+import 'package:tiktok_challenge/features/threads/thread.dart';
 import 'package:tiktok_challenge/features/main_navigation/nav_tab.dart';
+import 'package:tiktok_challenge/features/threads/widget/new_thread_modal.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -34,7 +35,22 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     ),
   ];
 
+  void _onCreateThread() async {
+    await showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) => const FractionallySizedBox(
+        heightFactor: 0.8,
+        child: NewThreadModal(),
+      ),
+    );
+  }
+
   void _onTap(int index) {
+    if (index == 2) {
+      _onCreateThread();
+      return;
+    }
     setState(() {
       _selectedIndex = index;
     });

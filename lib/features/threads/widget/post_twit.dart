@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
-import 'package:tiktok_challenge/features/timeline/widget/avatar_icon.dart';
+import 'package:tiktok_challenge/features/threads/widget/option_menu.dart';
+import 'package:tiktok_challenge/features/threads/widget/thread_avatar.dart';
 
 class TwitPost extends StatefulWidget {
   const TwitPost({super.key, required this.numberOfImage});
@@ -21,6 +22,19 @@ class _TwitPostState extends State<TwitPost> {
       count,
       (index) =>
           'https://picsum.photos/seed/${faker.randomGenerator.integer(1000)}/300/150', // Lorem Picsum 사용
+    );
+  }
+
+  void _ellipsisTap() async {
+    await showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) {
+        return const FractionallySizedBox(
+          heightFactor: 0.45,
+          child: OptionsMenu(),
+        );
+      },
     );
   }
 
@@ -78,12 +92,15 @@ class _TwitPostState extends State<TwitPost> {
                               size: Sizes.size14),
                         ],
                       ),
-                      const Row(
+                      Row(
                         children: [
-                          Text("2m"),
+                          const Text("2m"),
                           Gaps.h6,
-                          FaIcon(
-                            FontAwesomeIcons.ellipsis,
+                          GestureDetector(
+                            onTap: _ellipsisTap,
+                            child: const FaIcon(
+                              FontAwesomeIcons.ellipsis,
+                            ),
                           ),
                         ],
                       ),
@@ -138,14 +155,15 @@ class _TwitPostState extends State<TwitPost> {
                                       bottom: Sizes.size10,
                                       right: Sizes.size10,
                                     ),
-                                    clipBehavior: Clip.hardEdge,
-                                    decoration: BoxDecoration(
+                                    child: ClipRRect(
                                       borderRadius: BorderRadius.circular(
                                         Sizes.size10,
                                       ),
-                                    ),
-                                    child: Image.network(
-                                      imageUrls[index],
+                                      child: Image.network(
+                                        imageUrls[index],
+                                        fit: BoxFit.cover,
+                                      ),
+                                      // ),
                                     ));
                               },
                             )),
