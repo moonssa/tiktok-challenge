@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
+import 'package:tiktok_challenge/features/activity/activity_screen.dart';
+import 'package:tiktok_challenge/features/search/search_screen.dart';
 import 'package:tiktok_challenge/features/threads/thread.dart';
 import 'package:tiktok_challenge/features/main_navigation/nav_tab.dart';
 import 'package:tiktok_challenge/features/threads/widget/new_thread_modal.dart';
@@ -68,7 +70,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 1,
-            child: const Center(child: Text(" 🔎 준비중....")),
+            child: const SearchScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 2,
@@ -76,7 +78,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 3,
-            child: const Center(child: Text(" ❤️ 준비중....")),
+            child: const ActivityScreen(),
           ),
           Offstage(
             offstage: _selectedIndex != 4,
