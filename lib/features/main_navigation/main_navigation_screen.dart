@@ -6,6 +6,7 @@ import 'package:tiktok_challenge/features/search/search_screen.dart';
 import 'package:tiktok_challenge/features/threads/thread.dart';
 import 'package:tiktok_challenge/features/main_navigation/nav_tab.dart';
 import 'package:tiktok_challenge/features/threads/widget/new_thread_modal.dart';
+import 'package:tiktok_challenge/features/users/user_profile_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});
@@ -15,7 +16,7 @@ class MainNavigationScreen extends StatefulWidget {
 }
 
 class _MainNavigationScreenState extends State<MainNavigationScreen> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 4;
 
   final screens = [
     const Center(
@@ -82,7 +83,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 4,
-            child: const Center(child: Text(" 🧑‍⚕️ 준비중....")),
+            child: const UserProfileScreen(),
           ),
         ],
       )),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
 
 class VerticalLine extends StatelessWidget {
@@ -7,9 +8,14 @@ class VerticalLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        width: Sizes.size2,
-        color: Colors.grey.shade300,
+      child: Row(
+        children: [
+          Gaps.h20,
+          Container(
+            width: Sizes.size2,
+            color: Colors.grey.shade300,
+          ),
+        ],
       ),
     );
   }

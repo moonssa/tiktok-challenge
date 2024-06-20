@@ -6,15 +6,15 @@ import 'package:tiktok_challenge/constants/sizes.dart';
 import 'package:tiktok_challenge/features/threads/widget/option_menu.dart';
 import 'package:tiktok_challenge/features/threads/widget/thread_avatar.dart';
 
-class TwitPost extends StatefulWidget {
-  const TwitPost({super.key, required this.numberOfImage});
+class TweetPost extends StatefulWidget {
+  const TweetPost({super.key, required this.numberOfImage});
   final int numberOfImage;
 
   @override
-  State<TwitPost> createState() => _TwitPostState();
+  State<TweetPost> createState() => _TweetPostState();
 }
 
-class _TwitPostState extends State<TwitPost> {
+class _TweetPostState extends State<TweetPost> {
   final faker = Faker();
 
   List<String> generateImageUrls(int count) {

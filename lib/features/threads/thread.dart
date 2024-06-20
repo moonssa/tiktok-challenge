@@ -1,8 +1,10 @@
+import 'dart:math';
+
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:tiktok_challenge/constants/gaps.dart';
 import 'package:tiktok_challenge/constants/sizes.dart';
-import 'package:tiktok_challenge/features/threads/widget/post_twit.dart';
+import 'package:tiktok_challenge/features/threads/widget/tweet_post.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -60,10 +62,29 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ),
-        body: ListView(
+        body: ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            final random = Random();
+            final numberOfImage = random.nextInt(4);
+            return Column(
+              children: [
+                TweetPost(numberOfImage: numberOfImage),
+                Gaps.v12,
+                Divider(
+                  height: 2,
+                  thickness: 1,
+                  color: Colors.grey.shade400,
+                ),
+                Gaps.v12,
+              ],
+            );
+          },
+        ),
+        /* ListView(
           controller: _scrollController,
           children: [
-            const TwitPost(numberOfImage: 3),
+            const TweetPost(numberOfImage: 3),
             Gaps.v12,
             Divider(
               height: 2,
@@ -71,21 +92,21 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.grey.shade400,
             ),
             Gaps.v12,
-            const TwitPost(numberOfImage: 0),
+            const TweetPost(numberOfImage: 0),
             Divider(
               height: 2,
               thickness: 1,
               color: Colors.grey.shade400,
             ),
             Gaps.v12,
-            const TwitPost(numberOfImage: 5),
+            const TweetPost(numberOfImage: 5),
             Divider(
               height: 2,
               thickness: 1,
               color: Colors.grey.shade400,
             ),
           ],
-        ),
+        ), */
       ),
     );
   }
